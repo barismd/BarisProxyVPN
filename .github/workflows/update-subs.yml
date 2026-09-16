@@ -2,43 +2,47 @@ name: Update V2Ray Subscriptions
 
 on:
   schedule:
-    # Her saat başı çalışır (UTC)
     - cron: '0 * * * *'
-  workflow_dispatch:  # Manuel tetikleme imkanı
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 350
 
     steps:
-      - name: Depoyu Klonla
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Python Kurulumu
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Gerekli Kütüphaneleri Yükle
-        run: |
-          pip install requests
+      - name: Install deps
+        run: pip install requests
 
-      - name: Xray-core İndir ve Kur
+      - name: Download Xray-core
         run: |
           wget -q https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
           unzip -q Xray-linux-64.zip -d xray-core
           chmod +x xray-core/xray
-          echo "XRAY_PATH=$(pwd)/xray-core/xray" >> $GITHUB_ENV
+          ./xray-core/xray version
 
-      - name: Yapılandırmaları İşle
-        env:
-          XRAY_PATH: ${{ env.XRAY_PATH }}
+      - name: Process configs
         run: python scripts/process_configs.py
 
-      - name: Değişiklikleri Kaydet
+      - name: Commit & Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add sub.txt supersub.txt
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update subscriptions [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update subs $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
