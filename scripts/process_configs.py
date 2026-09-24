@@ -6,6 +6,7 @@ import json
 import os
 import re
 import shutil
+import signal
 import socket
 import subprocess
 import sys
@@ -25,16 +26,17 @@ SOURCE_URLS = [
 
 OUTPUT_ALL = "all_sub.txt"
 OUTPUT_SUPERS = "supersub.txt"
+OUTPUT_SUPERSUPERS = "supersupersub.txt"
 SPLIT_DIR = "splitted"
 SPLIT_SIZE = 500
 
 XRAY_PATH = os.environ.get("XRAY_PATH", "./xray-core/xray")
-SOCKS_PORT = 10808
 TEST_URL = "http://www.gstatic.com/generate_204"
-TUNNEL_TIMEOUT = 6
+TUNNEL_TIMEOUT = 5
 SERVER_TIMEOUT = 3
 SERVER_WORKERS = 50
-TUNNEL_WORKERS = 20
+TUNNEL_WORKERS = 40          # 20 -> 40 (paralel artırıldı)
+XRAY_BOOT_TIMEOUT = 3        # 4 -> 3 sn
 
 CONFIG_RE = re.compile(
     r'^(vmess|vless|trojan|ss|ssr|hy2|hysteria2|hysteria)://',
@@ -117,6 +119,13 @@ def get_port(cfg):
     return None
 
 
+def get_free_port():
+    """OS'ten boş bir port al."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
 # =====================================================================
 #  NORMALIZE (güçlendirildi) + DEDUP
 # =====================================================================
@@ -189,7 +198,7 @@ def dedup(configs):
 
 
 # =====================================================================
-#  SERVER TEST  (TCP reachability, lenient)
+#  SERVER TEST
 # =====================================================================
 
 def parse_uri_info(uri):
@@ -245,7 +254,7 @@ def test_server(uri, timeout=SERVER_TIMEOUT):
 
 
 # =====================================================================
-#  OUTBOUND BUILDERS  (tunnel test için)
+#  OUTBOUND BUILDERS
 # =====================================================================
 
 def _p(params, key, default=None):
@@ -499,20 +508,37 @@ def build_outbound(uri):
 
 
 # =====================================================================
-#  TUNNEL TEST  (gerçek proxy trafiği)
+#  TUNNEL TEST  (her teste ÖZEL port + process-group kill)
 # =====================================================================
 
-def wait_port(host, port, proc, timeout=4.0):
+def _kill_tree(proc):
+    """Process'i tüm child'larıyla birlikte öldür."""
+    if proc is None or proc.poll() is not None:
+        return
+    try:
+        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+    except Exception:
+        try:
+            proc.kill()
+        except Exception:
+            pass
+    try:
+        proc.wait(timeout=2)
+    except Exception:
+        pass
+
+
+def wait_port(host, port, proc, timeout):
     end = time.time() + timeout
     while time.time() < end:
         if proc.poll() is not None:
             return False
         try:
-            s = socket.create_connection((host, port), timeout=0.3)
+            s = socket.create_connection((host, port), timeout=0.2)
             s.close()
             return True
         except OSError:
-            time.sleep(0.15)
+            time.sleep(0.1)
     return False
 
 
@@ -524,10 +550,13 @@ def test_tunnel(uri, xray_path):
     if outbound is None:
         return False, "unsupported"
 
+    # 🔑 her teste kendi boş portu
+    port = get_free_port()
+
     config = {
         "log": {"loglevel": "error"},
         "inbounds": [{
-            "port": SOCKS_PORT,
+            "port": port,
             "listen": "127.0.0.1",
             "protocol": "socks",
             "settings": {"udp": False, "auth": "noauth"},
@@ -546,8 +575,9 @@ def test_tunnel(uri, xray_path):
             [xray_path, "run", "-c", cfg_path],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
+            start_new_session=True,   # 🔑 kendi process grubu
         )
-        if not wait_port("127.0.0.1", SOCKS_PORT, proc, timeout=4.0):
+        if not wait_port("127.0.0.1", port, proc, timeout=XRAY_BOOT_TIMEOUT):
             return False, "xray-not-up"
 
         try:
@@ -556,10 +586,10 @@ def test_tunnel(uri, xray_path):
                     "curl", "-s", "-o", "/dev/null",
                     "-w", "%{http_code}",
                     "--max-time", str(TUNNEL_TIMEOUT),
-                    "--socks5-hostname", f"127.0.0.1:{SOCKS_PORT}",
+                    "--socks5-hostname", f"127.0.0.1:{port}",
                     TEST_URL,
                 ],
-                capture_output=True, text=True, timeout=TUNNEL_TIMEOUT + 3,
+                capture_output=True, text=True, timeout=TUNNEL_TIMEOUT + 2,
             )
             code = res.stdout.strip()
             return (code in ("200", "204", "301", "302")), code or "empty"
@@ -568,12 +598,7 @@ def test_tunnel(uri, xray_path):
     except Exception as e:
         return False, f"err:{type(e).__name__}"
     finally:
-        if proc and proc.poll() is None:
-            proc.terminate()
-            try:
-                proc.wait(timeout=2)
-            except subprocess.TimeoutExpired:
-                proc.kill()
+        _kill_tree(proc)
         try:
             os.unlink(cfg_path)
         except OSError:
@@ -650,7 +675,8 @@ def main():
     # ---------- TUNNEL TEST ----------
     tunnel_pass = []
     if os.path.exists(XRAY_PATH) and server_pass:
-        print(f"[BİLGİ] Tunnel testi başlıyor ({len(server_pass)} config)...", flush=True)
+        print(f"[BİLGİ] Tunnel testi başlıyor ({len(server_pass)} config) "
+              f"workers={TUNNEL_WORKERS} timeout={TUNNEL_TIMEOUT}s...", flush=True)
         done = 0
         with ThreadPoolExecutor(max_workers=TUNNEL_WORKERS) as ex:
             futures = {ex.submit(test_tunnel, c, XRAY_PATH): c for c in server_pass}
@@ -670,14 +696,21 @@ def main():
         print("[UYARI] Xray yok veya server_pass boş, tunnel testi atlandı", flush=True)
 
     # ---------- SUPERS (lenient) ----------
+    server_set = set(server_pass)
     tunnel_set = set(tunnel_pass)
-    supersub = [c for c in server_pass if c in tunnel_set] \
-             + [c for c in server_pass if c not in tunnel_set]
+    union_set = server_set | tunnel_set
+    supersub = [c for c in unique if c in union_set]
 
     with open(OUTPUT_SUPERS, "w", encoding="utf-8") as f:
         f.write("\n".join(supersub) + ("\n" if supersub else ""))
-    print(f"[BİLGİ] {OUTPUT_SUPERS} yazıldı -> {len(supersub)} config "
-          f"({len(tunnel_pass)} tunnel-onaylı en üstte)", flush=True)
+    print(f"[BİLGİ] {OUTPUT_SUPERS} yazıldı -> {len(supersub)} config", flush=True)
+
+    # ---------- SUPERSUPERS (strict) ----------
+    supersupersub = [c for c in unique if c in server_set and c in tunnel_set]
+
+    with open(OUTPUT_SUPERSUPERS, "w", encoding="utf-8") as f:
+        f.write("\n".join(supersupersub) + ("\n" if supersupersub else ""))
+    print(f"[BİLGİ] {OUTPUT_SUPERSUPERS} yazıldı -> {len(supersupersub)} config", flush=True)
 
 
 if __name__ == "__main__":
