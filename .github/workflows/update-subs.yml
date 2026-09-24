@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -25,13 +25,6 @@ jobs:
       - name: Install deps
         run: pip install requests
 
-      - name: Download Xray-core
-        run: |
-          wget -q https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip -q Xray-linux-64.zip -d xray-core
-          chmod +x xray-core/xray
-          ./xray-core/xray version
-
       - name: Process configs
         run: python scripts/process_configs.py
 
@@ -39,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add sub.txt supersub.txt
+          git add all_sub.txt splitted/
           if git diff --staged --quiet; then
             echo "No changes"
           else
