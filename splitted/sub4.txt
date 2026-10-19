@@ -1,3 +1,4 @@
+vless://9cb18d5e-69e9-4338-9338-de7d523ba4de@DN2.pconnectq.ir:443?security=reality&encryption=none&pbk=hiwmkUU64-16Xlxtp8WrbmG6y4j1_RGr09GGXmYbPw4&host=/?Telegram---PLANB_NET---PLANB_NET---PLANB_NET---PLANB_NET&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.tencent.com&sid=012e1adb09710097#@Shh_Proxy-New³
 vless://9cb8d71c-fe06-4402-a591-eaa1f173b890@83.168.91.16:443?mode=gun&security=tls&encryption=none&insecure=0&fp=chrome&type=grpc&serviceName=framefeed&allowInsecure=0&sni=pl-exit-02.10media.top#@MDvpnSEC 🌟
 vless://9cb8d71c-fe06-4402-a591-eaa1f173b890@edge-lab-b.10media.top:443?mode=gun&security=tls&encryption=none&insecure=0&type=grpc&serviceName=swedenfeed&allowInsecure=0&sni=edge-lab-b.10media.top#@MDvpnSEC⚡
 vless://9cb8d71c-fe06-4402-a591-eaa1f173b890@edge-lab-pl.10media.top:443?mode=gun&security=tls&encryption=none&insecure=0&type=grpc&serviceName=framefeed&allowInsecure=0&sni=edge-lab-pl.10media.top#@MDvpnSEC⚡
@@ -497,4 +498,3 @@ vless://d342d11e-d224-4463-b982-532309285094@31.57.190.89:443?path=/fp=chrome&se
 vless://d342d11e-d224-4463-b982-532309285094@31.57.190.89:443?path=/fp=chrome&security=tls&encryption=none&host=ccc.010304.xyz&type=ws&sni=ccc.010304.xyz#@V2ray_confiig
 vless://d342d11e-d224-4463-b982-532309285094@31.57.190.89:443?path=/fp=chrome&security=tls&encryption=none&insecure=0&host=ccc.010304.xyz&fp=chrome&type=ws&allowInsecure=0&sni=ccc.010304.xyz#@ICV2RAY
 vless://d342d11e-d224-4463-b982-532309285094@31.57.190.89:443?path=/fp=chrome&security=tls&encryption=none&insecure=0&host=ccc.010304.xyz&type=ws&allowInsecure=0&sni=ccc.010304.xyz#@ICV2RAY
-vless://d342d11e-d224-4463-b982-532309285094@31.77.126.2:443?encryption=none&security=tls&sni=ccc.010304.xyz&type=ws&host=ccc.010304.xyz&path=/#@tootffarangi🍓
