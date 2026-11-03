@@ -1,5 +1,9 @@
+trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.127.155:443?security=tls&sni=indyourperfectremotetechjobfromthecomfortofhome.com&type=tcp&headerType=none#Channel%20%3A%20%40Daily_Configs
+vless://e75ad2eb-6c1f-45ce-8023-f5f10875df66@205.237.110.254:443?pbk=IG6lxrx_xkGOoBuo3DC8sgQoIFmqVgznIr0qOuNO0w4&security=reality&fm=AhmadV2ray&type=tcp&sni=zsit.eu-cdn294.com&flow=xtls-rprx-vision&headerType=none&encryption=none&sid=cd2d53510b4df2a8&fp=chrome&spx=/AhmadV2ray#United+States
 vless://e75ad2eb-6c1f-45ce-8023-f5f10875df66@205.237.110.254:443?security=reality&encryption=none&pbk=IG6lxrx_xkGOoBuo3DC8sgQoIFmqVgznIr0qOuNO0w4&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=zsit.eu-cdn294.com&sid=cd2d53510b4df2a8#%40FarazV2ray%20
 vless://44ae52b9-76fc-444d-8e43-186b4384b80a@86.54.28.75:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=www.apple.com&fp=chrome&security=reality&pbk=PryGoq51ilG0eLUPl9i0xCvmk1xpwkyFSr_tG4GNLlU&sid=1d86d17709852910#0201%20%7C%20%F0%9F%87%B3%F0%9F%87%B1%20NetFreedom0%20
+vless://3536e1fa-0850-44d1-b123-925ce12476cf@dey.lnmarketplace.net:443?encryption=none&security=tls&sni=dey.lnmarketplace.net&alpn=h2&type=xhttp&host=dey.lnmarketplace.net&path=%2Fkavir&mode=stream-one&extra=%7B%22headers%22%3A%7B%22User-Agent%22%3A%22Mozilla%2F5.0%28WindowsNT10.0%3BWin64%3Bx64%29AppleWebKit%2F537.36%28KHTML%2ClikeGecko%29Chrome%2F101.0.4951.67Safari%2F537.36%22%7D%2C%22noGRPCHeader%22%3Atrue%2C%22xmux%22%3A%7B%22hKeepAlivePeriod%22%3A12%2C%22maxConcurrency%22%3A%226%22%7D%7D#%40Daily_Configs%20%3A%20%DA%A9%D8%A7%D9%86%D8%A7%D9%84%20%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85
+ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@158.173.20.208:443#%E2%9A%99%EF%B8%8F8@oneclickvpnkeys
 hy2://qQe1z5kU8kN6SlKnDt9Ru3Qp@54.213.89.22:443?insecure=1&sni=vk.com&type=tcp&allowInsecure=1&upmbps=10&downmbps=50#🇺🇸139909 | ⚡️Telegram = t.me/SOSkeyNET
 hysteria2://59018379-d5df-4314-ab23-df0e838d7953@198.13.140.193:443/?obfs=salamander&obfs-password=litevpn&sni=efa11.lumariqis.com#⚡7@oneclickvpnkeys
 hysteria2://6aab8efdf13945829ae3699c342be406@31.76.80.69:443?security=tls&obfs=salamander&obfs-password=uw9b2qq5rx&insecure=0&sni=fiproxy1.lockdwn.com#@confiig_hub
@@ -78,7 +82,6 @@ ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@156.146.38.167:443#@FarazV2ray
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@156.146.38.168:443#@FarazV2ray
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@156.146.38.169:443#@V2raySaman
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@156.146.38.170:443#@FarazV2ray
-ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@158.173.20.208:443#@FXxNET⚡️
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@173.244.56.9:443#@FarazV2ray
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@37.19.198.243:443#@FarazV2ray
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@37.19.198.244:443#@FarazV2ray
@@ -208,7 +211,6 @@ trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.122.113:443?security=tls&insecu
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.122.7:443?security=tls&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=www.searchnationwidecareerchangehelperandguidancetoday.com#@i10VPN¹⁰
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.122.81:443?security=tls&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=courses.searchnationwidecareerchangehelperandguidancetoday.com#Channel id: @ConfigV2RayNG 🇺🇸
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.127.154:443?fp=chrome&sni=www.indyourperfectremotetechjobfromthecomfortofhome.com#⏳10@oneclickvpnkeys
-trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.127.155:443?security=tls&headerType=none&type=tcp&sni=indyourperfectremotetechjobfromthecomfortofhome.com#@FXxNET⚡️
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.127.155:443?security=tls&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=indyourperfectremotetechjobfromthecomfortofhome.com#@B2Hub
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.127.155:443?security=tls&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=indyourperfectremotetechjobfromthecomfortofhome.com&host=/?Telegram---PLANB_NET---PLANB_NET---PLANB_NET---PLANB_NET#Telegram 👉🏼 @planB_net  • 08
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@66.163.127.155:443?sni=indyourperfectremotetechjobfromthecomfortofhome.com#⏳4@oneclickvpnkeys
@@ -496,5 +498,3 @@ trojan://humanity@www.speedtest.net:443?path=/assignment?ed#Telegram---bored_vpn
 trojan://humanity@www.speedtest.net:443?type=ws&path=/assignment?ed#Telegram---mehrosaboran&host=www.calmlunch.com&security=tls&sni=www.calmlunch.com#@VPsave
 trojan://k3hlvcxvbol6p6dh@chatgpt.com:443?path=/---@SGV2RAY---@SGV2RAY/---@SGV2RAY---@SGV2RAY/---@SGV2RAY---@SGV2RAY/--@SGV2RAY---@SGV2RAY/---@SGV2RAY---@SGV2RAY/---@SGV2RAY---@SGV2RAY&security=tls&alpn=http/1.1&insecure=0&host=wenoos.pecasoou.ir&fp=chrome&ech=Nazar.ac.ir+udp://78.157.42.100&type=ws&allowInsecure=0&sni=cafetanoos.pecasoou.ir#𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺 : 𝗦𝗴𝘃2𝗿𝗮𝘆 جوین شو
 trojan://k3hlvcxvbol6p6dh@openai.com:443?path=/---@SGV2RAY---@SGV2RAY/---@SGV2RAY---@SGV2RAY/---@SGV2RAY---@SGV2RAY/--@SGV2RAY---@SGV2RAY/---@SGV2RAY---@SGV2RAY/---@SGV2RAY---@SGV2RAY&security=tls&alpn=http/1.1&insecure=0&host=wenoos.pecasoou.ir&fp=chrome&ech=Nazar.ac.ir+udp://78.157.42.100&type=ws&allowInsecure=0&sni=dl-61sv.pecasoou.ir#𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺 : 𝗦𝗴𝘃2𝗿𝗮𝘆 جوین شو
-trojan://miTivpn@151.101.56.90:443?security=tls&alpn=http/1.1&insecure=0&host=mitivpn---ss--s---mitivpn-66e.global.ssl.fastly.net&fp=chrome&type=ws&allowInsecure=0&sni=ssl.fastly.com#@prrofile_purple | 𝗙𝗮𝗦𝗧 💚
-trojan://mitivpn@104.16.72.70:443?path=/index.php/ed=mitivpn&security=tls&alpn=http/1.1&insecure=0&host=gamingdll.ir&fp=chrome&type=ws&allowInsecure=0&sni=gamingdll.ir#TEL;Father_vpn
